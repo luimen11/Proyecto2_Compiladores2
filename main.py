@@ -170,7 +170,7 @@ elif archivo:
           print(encabezados)
           last = encabezados.pop()
           for a in encabezados:
-               if(a!='#' and a!='NO' and a!='No.' and a!='NO.' and a!='Num'and a!=last):
+               if(a!='#' and a!='id' and a!='NO' and a!='No.' and a!='NO.' and a!='Num'and a!=last):
                     temp = np.asarray(df[a])    
                     dic_enc[a] = le.fit_transform(temp)
           
@@ -207,7 +207,7 @@ elif archivo:
           print(encabezados)
           last = encabezados.pop()
           for a in encabezados:
-               if(a!='#' and a!='NO' and a!='No.' and a!='NO.' and a!='Num'and a!=last):
+               if(a!='#' and a!='id' and a!='NO' and a!='No.' and a!='NO.' and a!='Num'and a!=last):
                     temp = np.asarray(df[a])    
                     dic_enc[a] = le.fit_transform(temp)
           
@@ -250,7 +250,7 @@ elif archivo:
           last = encabezados.pop()
 
           for a in encabezados:
-               if(a!='#' and a!='NO' and a!='No.' and a!='NO.' and a!='Num'and a!=last):
+               if(a!='#' and a!='id' and a!='NO' and a!='No.' and a!='NO.' and a!='Num'and a!=last):
                     temp = np.asarray(df[a])    
                     dic_enc[a] = le.fit_transform(temp)
           

@@ -107,24 +107,30 @@ elif archivo:
           if nb_degree != 0:               
                polynomial_features = PolynomialFeatures(degree = nb_degree)
 
-               x_train_pol = polynomial_features.fit_transform(x_train)
-               x_test_pol = polynomial_features.fit_transform(x_test)
+               # x_train_pol = polynomial_features.fit_transform(x_train)
+               # x_test_pol = polynomial_features.fit_transform(x_test)
+
+               x1 = polynomial_features.fit_transform(x)
 
                #Defino el algoritmo
                model = linear_model.LinearRegression()
 
                #Entreno el modelo
-               model.fit(x_train_pol, y_train)
+               #model.fit(x_train_pol, y_train)               
+               model.fit(x1, y)               
 
                #Prediccion
-               y_pred = model.predict(x_test_pol)
+               #y_pred = model.predict(x_test_pol)               
+               y_pred = model.predict(x1)               
 
                st.subheader('Resultados:')
 
                #Graficamos los datos junto con el modelo
                fig1, ax1 = plt.subplots()
-               plt.scatter(x_test, y_test)
-               plt.plot(x_test, y_pred, color='red', linewidth=3)
+               #plt.scatter(x_test, y_test)               
+               plt.scatter(x, y)               
+               #plt.plot(x_test, y_pred, color='red', linewidth=3)               
+               plt.plot(x, y_pred, color='red', linewidth=3)               
                st.pyplot(fig1)
 
                #Datos del modelo
@@ -134,13 +140,16 @@ elif archivo:
                st.write('Valor de la inteserccion o coeficiente b')
                st.write(model.intercept_)
                
-               st.metric(label='Precision del modelo', value=(model.score(x_train_pol, y_train)))
+               st.metric(label='Precision del modelo', value=(model.score(x1, y)))
+               #st.metric(label='Precision del modelo', value=(model.score(x_train_pol, y_train)))
                #st.write(model.score(x_train_pol, y_train))
                
-               rmse = np.sqrt(mean_squared_error(y_test, y_pred))                   
+               #rmse = np.sqrt(mean_squared_error(y_test, y_pred))                                  
+               rmse = np.sqrt(mean_squared_error(y, y_pred))                                  
                st.metric(label='Error cuadrático medio: ', value=rmse)
                
-               r2 = r2_score(y_test, y_pred)          
+               #r2 = r2_score(y_test, y_pred)                         
+               r2 = r2_score(y, y_pred)                         
                st.metric(label='Varianza: ', value=r2)
      
                #Prediccion

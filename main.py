@@ -235,8 +235,12 @@ elif archivo:
                st.metric(label='Prediccion ', value=predicted)               
 
                target = list(df[last].unique())
+               target2 = []
+               for a in target:
+                    print(a)
+                    target2.append(str(a))
                fig1, ax1 = plt.subplots()
-               plot_tree(clf, filled=True, class_names=target)
+               plot_tree(clf, filled=True, class_names=target2)
                st.pyplot(fig1)
 
      #======================================================================

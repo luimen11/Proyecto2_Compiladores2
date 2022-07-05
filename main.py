@@ -178,13 +178,13 @@ elif archivo:
           label = le.fit_transform(play)
           features = list(zip(*dic_enc.values()))
           #print(features)
-          st.write(features)
+          #st.write(features)
           st.table(features)
           model = GaussianNB()
 
           model.fit(features, label)
 
-          valores = st.text_input("Ingrese los valores a predecir seprados por comas:")
+          valores = st.text_input("Ingrese los valores a predecir separados por comas:")
 
           if(valores != ''):
                valor_num = valores.split(',')
@@ -213,9 +213,10 @@ elif archivo:
           
           play = np.asarray(df[last])
           label = le.fit_transform(play)
+
           features = list(zip(*dic_enc.values()))
           
-          st.write(features)
+          #st.write(features)
           st.table(features)
           
           clf = DecisionTreeClassifier()
@@ -229,7 +230,7 @@ elif archivo:
           #plt.show()
           st.pyplot(fig1)
               
-          valores = st.text_input("Ingrese los valores a predecir seprados por comas:")
+          valores = st.text_input("Ingrese los valores a predecir separados por comas:")
 
           if(valores != ''):
                valor_num = valores.split(',')
@@ -237,6 +238,7 @@ elif archivo:
                for a in valor_num:
                     lista.append(int(a))
                
+               st.write(lista)
                predicted = clf.predict([lista])          
                st.metric(label='Prediccion ', value=predicted)
 

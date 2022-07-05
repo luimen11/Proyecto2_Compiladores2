@@ -219,16 +219,7 @@ elif archivo:
           #st.write(features)
           st.table(features)
           
-          clf = DecisionTreeClassifier()
-          
-          clf.fit(features, label)
-
-
-          target = list(df[last].unique())
-          fig1, ax1 = plt.subplots()
-          plot_tree(clf, filled=True, class_names=target)
-          #plt.show()
-          st.pyplot(fig1)
+          clf = DecisionTreeClassifier().fit(features, label)
               
           valores = st.text_input("Ingrese los valores a predecir separados por comas:")
 
@@ -240,7 +231,12 @@ elif archivo:
                
                st.write(lista)
                predicted = clf.predict([lista])          
-               st.metric(label='Prediccion ', value=predicted)
+               st.metric(label='Prediccion ', value=predicted)               
+
+               target = list(df[last].unique())
+               fig1, ax1 = plt.subplots()
+               plot_tree(clf, filled=True, class_names=target)
+               st.pyplot(fig1)
 
      #======================================================================
      # Redes neuronales

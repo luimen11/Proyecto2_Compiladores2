@@ -272,11 +272,12 @@ elif archivo:
                     lista.append(int(a))
                tupla = tuple(lista)
 
+               print('Tupla: ', tupla)
                iter = st.text_input("Ingrese el numero de iteraciones:")
 
                if(iter != ''):
                     iter = int(iter)                                 
-                                                  
+                    print('repeticiones: ', iter)                     
                     mlp = MLPClassifier(hidden_layer_sizes=tupla, max_iter=iter)
                     mlp.fit(features, label)
                     prediction = mlp.predict(features)
@@ -295,7 +296,7 @@ elif archivo:
                          
                          predicted = mlp.predict([lista_pred])          
                          #st.metric(label='Prediccion ', value=predicted)
-                         st.write('Prediccion: ')
+                         st.write('Prediccion según valores ingresados: ')
                          st.write(predicted)
 
 

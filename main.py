@@ -11,6 +11,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn import preprocessing, tree
 from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.neural_network import MLPClassifier
 
 
 #st.beta_set_page_config(page_title='Segundo Proyecto')
@@ -234,7 +235,65 @@ elif archivo:
      # Redes neuronales
      #======================================================================  
      elif opcion == "Redes neuronales":
-          pass
+          st.write(df) 
+          le = preprocessing.LabelEncoder()
+          encabezados = df.columns.values.tolist()
+          
+          dic_enc = {}          
+          last = encabezados.pop()
+
+          for a in encabezados:
+               if(a!='#' and a!='NO' and a!='No.' and a!='NO.' and a!='Num'and a!=last):
+                    temp = np.asarray(df[a])    
+                    dic_enc[a] = le.fit_transform(temp)
+          
+          play = np.asarray(df[last])
+          label = le.fit_transform(play)
+          features = list(zip(*dic_enc.values()))
+                    
+          st.table(features)
+
+          #Entrenando el modelo
+          x_train, x_test, y_train, y_test = train_test_split(features,label, test_size = 0.2)
+
+          capas = st.text_input("Ingrese el tamaño de las capas separadas por comas:")
+
+          if(capas != ''):
+               valores = capas.split(',')
+               lista = []
+               for a in valores:
+                    lista.append(int(a))
+               tupla = tuple(lista)
+
+               iter = st.text_input("Ingrese el numero de iteraciones:")
+
+               if(iter != ''):
+                    iter = int(iter)                                 
+                                                  
+                    mlp = MLPClassifier(hidden_layer_sizes=tupla, max_iter=iter)
+                    mlp.fit(features, label)
+                    prediction = mlp.predict(features)
+                    st.write('Prediccion: ')
+                    st.write(prediction)
+                    #st.metric(label='Resultado de la prediccion ', value=prediction)
+
+
+                    valores_pred = st.text_input("Ingrese los valores a predecir seprados por comas:")
+
+                    if(valores_pred != ''):
+                         v = valores_pred.split(',')
+                         lista_pred = []
+                         for a in v:
+                              lista_pred.append(int(a))
+                         
+                         predicted = mlp.predict([lista_pred])          
+                         #st.metric(label='Prediccion ', value=predicted)
+                         st.write('Prediccion: ')
+                         st.write(predicted)
+
+
+
+
 
 
 

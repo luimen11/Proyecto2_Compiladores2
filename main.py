@@ -177,9 +177,9 @@ elif archivo:
           play = np.asarray(df[last])
           label = le.fit_transform(play)
           features = list(zip(*dic_enc.values()))
-          #print(features)
+          print(features)
           #st.write(features)
-          st.table(features)
+          #st.table(features)
           model = GaussianNB()
 
           model.fit(features, label)
@@ -217,7 +217,8 @@ elif archivo:
           features = list(zip(*dic_enc.values()))
           
           #st.write(features)
-          st.table(features)
+          print(features)
+          #st.table(features)
           
           clf = DecisionTreeClassifier().fit(features, label)
               
@@ -258,7 +259,8 @@ elif archivo:
           label = le.fit_transform(play)
           features = list(zip(*dic_enc.values()))
                     
-          st.table(features)
+          print(features)
+          #st.table(features)
 
           #Entrenando el modelo
           x_train, x_test, y_train, y_test = train_test_split(features,label, test_size = 0.2)
